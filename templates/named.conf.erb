@@ -92,13 +92,13 @@ include "/etc/rndc.key";
 zone "<%= zone %>" in {
   type <%= data['type'] %>;
   file "<%= data['file'] %>";
-  <% if data['type'] == 'slave' -%>
+<% if data['type'] == 'slave' -%>
   masters {
-  <% data['masters'].sort.each do |master| -%>
-  <%= master %>
-  <% end -%>
+<% data['masters'].sort.each do |master| -%>
+    <%= master %>
+<% end -%>
   };
-  <% end -%>
+<% end -%>
 };
 <% end -%>
 <% end -%>
