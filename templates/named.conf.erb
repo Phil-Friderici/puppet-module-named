@@ -1,4 +1,7 @@
 //
+// This file is managed by the puppet module puppet-module-named
+// All local changes will be overwritten
+//
 // named.conf
 //
 // Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
@@ -32,10 +35,11 @@ options {
 	   attacks. Implementing BCP38 within your network would greatly
 	   reduce such attack surface
 	*/
+
 	recursion <%= @recursion %>;
 
 <% if @checknames -%>
-  check-names response <%= checknames %>
+  check-names response <%= checknames %>;
 
 <% end -%>
 <% if @forwarders -%>
