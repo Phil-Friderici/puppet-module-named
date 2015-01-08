@@ -95,7 +95,7 @@ zone "<%= zone %>" in {
   <% if data['type'] == 'slave' -%>
   masters {
   <% data['masters'].sort.each do |master| -%>
-    <%= master %>
+  <%= master %>
   <% end -%>
   };
   <% end -%>
