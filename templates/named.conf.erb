@@ -88,4 +88,8 @@ include "/etc/rndc.key";
 <% end -%>
 <% if @zones -%>
 
+<% zones.sort.each do |zone,data| -%>
+zone "<%= zone %>" in {
+
+<% end -%>};
 <% end -%>
