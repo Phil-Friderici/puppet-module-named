@@ -28,6 +28,10 @@ options {
 	*/
 	recursion <%= @recursion %>;
 
+<% if forwaders != undef %>
+  forwarders { <% forwarders.sort.each do |forwarder| -%><%= forwarder %>; <% end -%> }
+<% end -%>
+
 	dnssec-enable yes;
 	dnssec-validation yes;
 	dnssec-lookaside auto;
@@ -53,6 +57,8 @@ zone "." IN {
 	file "named.ca";
 };
 
-<% if rfc1912enabled == true %>include "/etc/named.rfc1912.zones";<% end -%>
+<% if rfc1912enabled == true %>
+include "/etc/named.rfc1912.zones";
+<% end -%>
 include "/etc/named.root.key";
 

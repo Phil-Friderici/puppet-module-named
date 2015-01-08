@@ -1,7 +1,7 @@
 class named (
   $chroot           = false,
   $forwarders       = undef,
-  $recursion        = undef,
+  $recursion        = 'yes',
   $ipv4listen       = [ '127.0.0.1', ],
   $ipv4port         = '53',
   $ipv6enable       = true,
@@ -41,12 +41,12 @@ class named (
       enable  => false,
     }
     service {'named-chroot':
-      ensure  => started,
+      ensure  => running,
       enable  => true,
     }
   } else {
     service {'named':
-      ensure  => started,
+      ensure  => running,
       enable  => true,
     }
   } 
@@ -55,7 +55,8 @@ class named (
     ensure  => present,
     owner   => 'root',
     group   => 'root',
-    module  => '0640',
+    mode    => '0640',
+    content => template('named/named.conf.erb'),
   }
 
   #file {$namedzones:
