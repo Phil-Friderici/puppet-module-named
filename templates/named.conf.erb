@@ -90,8 +90,15 @@ include "/etc/rndc.key";
 
 <% zones.sort.each do |zone,data| -%>
 zone "<%= zone %>" in {
-  type <%= data['type'] %>
-
+  type <%= data['type'] %>;
+  file "<%= data['file'] %>";
+  <% if @data['masters'] -%>
+  masters {
+  <% data['masters'].sort.each do |master| -%>
+    <%= master %>
+  <% end -%>
+  };
+  <% end -%>
 };
 <% end -%>
 <% end -%>
