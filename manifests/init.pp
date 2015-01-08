@@ -7,7 +7,6 @@ class named (
   $ipv6enable       = true,
   $ipv6listen       = [ '::1', ],
   $ipv6port         = '53',
-  $acl              = undef,
   $allowquery       = [ 'localhost', ],
   $allowquerycache  = undef,
   $allowtransfer    = undef,

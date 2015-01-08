@@ -28,8 +28,12 @@ options {
 	*/
 	recursion <%= @recursion %>;
 
-<% if forwaders != undef %>
-  forwarders { <% forwarders.sort.each do |forwarder| -%><%= forwarder %>; <% end -%> }
+<% if @forwarders %>
+  forwarders { 
+    <% forwarders.sort.each do |forwarder| -%>
+    <%= forwarder %>; 
+    <% end -%> 
+  };
 <% end -%>
 
 	dnssec-enable yes;
