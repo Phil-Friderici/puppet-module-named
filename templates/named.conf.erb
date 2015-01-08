@@ -90,6 +90,8 @@ include "/etc/rndc.key";
 
 <% zones.sort.each do |zone,data| -%>
 zone "<%= zone %>" in {
+  type < %data['type'] %>
 
-<% end -%>};
+};
+<% end -%>
 <% end -%>
