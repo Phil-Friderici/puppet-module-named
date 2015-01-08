@@ -2,6 +2,7 @@ class named (
   $chroot           = false,
   $forwarders       = undef,
   $recursion        = 'yes',
+  $checknames       = undef,
   $ipv4listen       = [ '127.0.0.1', ],
   $ipv4port         = '53',
   $ipv6enable       = true,

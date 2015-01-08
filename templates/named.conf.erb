@@ -34,6 +34,10 @@ options {
 	*/
 	recursion <%= @recursion %>;
 
+<% if @checknames -%>
+  check-names response <%= checknames %>
+
+<% end -%>
 <% if @forwarders -%>
   forwarders {
   <% forwarders.sort.each do |forwarder| -%>
