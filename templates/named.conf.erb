@@ -8,13 +8,16 @@
 //
 
 options {
-	listen-on port <%= @ipv4port %> { 127.0.0.1; };
-	listen-on-v6 port <%= @ipv6port %> { ::1; };
+	listen-on port <%= @ipv4port %> { <% ipv6listen.sort.each do |ipv4| -%><%= ipv4 %>; <% end -%>};
+	listen-on-v6 port <%= @ipv6port %> { <% ipv6listen.sort.each do |ipv6| -%><%= ipv6 %>; <% end -%> };
 	directory 	"/var/named";
 	dump-file 	"/var/named/data/cache_dump.db";
 	statistics-file "/var/named/data/named_stats.txt";
 	memstatistics-file "/var/named/data/named_mem_stats.txt";
-	allow-query     { localhost; };
+	allow-query     { <% allowquery.sort.each do |allowq| -%><%= allowq %>; <% end -%>};
+<% if @allowquerycache -%>
+
+<% end -%>
 
 	/* 
 	 - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
@@ -27,13 +30,11 @@ options {
 	   reduce such attack surface 
 	*/
 	recursion <%= @recursion %>;
-
-<% if @forwarders %>
+<% if @forwarders -%>
   forwarders { 
     <% forwarders.sort.each do |forwarder| -%>
     <%= forwarder %>; 
-    <% end -%> 
-  };
+  <% end -%>};
 <% end -%>
 
 	dnssec-enable yes;
