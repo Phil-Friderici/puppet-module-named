@@ -2,19 +2,20 @@ class named (
   $chroot           = false,
   $forwarders       = undef,
   $recursion        = undef,
-  $ipv4listen       = 'none',
+  $ipv4listen       = [ '127.0.0.1', ],
   $ipv4port         = '53',
-  $ipv6listen       = 'none',
+  $ipv6enable       = true,
+  $ipv6listen       = [ '::1', ],
   $ipv6port         = '53',
   $acl              = undef,
-  $allowquery       = undef,
+  $allowquery       = [ 'localhost', ],
   $allowquerycache  = undef,
   $allowtransfer    = undef,
   $allowupdate      = undef,
   $namedconf        = '/etc/named.conf',
   $namedzones       = '/etc/named.zones',
+  $rfc1912enabled   = true,
 ) {
-
 
   if ($::operatingsystem == 'RedHat' and $::operatingsystemmajrelease == '7') {
     if ($chroot == true) {
@@ -52,11 +53,13 @@ class named (
 
   file {$namedconf:
     ensure  => present,
-    
+    owner   => 'root',
+    group   => 'root',
+    module  => '0640',
   }
 
-  file {$namedzones:
-    ensure  => present,
-
-  }
+  #file {$namedzones:
+  #  ensure  => present,
+  #
+  #}
 }
