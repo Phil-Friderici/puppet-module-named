@@ -54,7 +54,7 @@ class named (
   file {$namedconf:
     ensure  => present,
     owner   => 'root',
-    group   => 'root',
+    group   => 'named',
     mode    => '0640',
     content => template('named/named.conf.erb'),
   }
