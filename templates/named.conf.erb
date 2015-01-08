@@ -14,7 +14,7 @@ options {
 	dump-file 	"/var/named/data/cache_dump.db";
 	statistics-file "/var/named/data/named_stats.txt";
 	memstatistics-file "/var/named/data/named_mem_stats.txt";
-	allow-query     { <% allowquery.sort.each do |allowq| -%><%= allowq %>; <% end -%>};
+	allow-query { <% allowquery.sort.each do |allowq| -%><%= allowq %>; <% end -%>};
 <% if @allowquerycache -%>
   allow-query-cache { <% allowquerycache.sort.each do |allowc| -%><%= allowc %>; <% end -%>};
 <% end -%>
@@ -70,3 +70,10 @@ zone "." IN {
 include "/etc/named.rfc1912.zones";
 <% end -%>
 include "/etc/named.root.key";
+<% if rndcenabled == true -%>
+controls {
+  inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
+};
+
+include "/etc/rndc.key";
+<% end -%>
