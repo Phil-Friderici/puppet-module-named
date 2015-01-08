@@ -18,6 +18,9 @@ options {
 <% if @allowquerycache -%>
   allow-query-cache { <% allowquerycache.sort.each do |allowc| -%><%= allowc %>; <% end -%>};
 <% end -%>
+<% if @allowtransfer -%>
+  allow-transfer { <% allowtransfer.sort.each do |allowt| -%><%= allowt %>; <% end -%>};
+<% end -%>
 
 	/*
 	 - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
@@ -30,6 +33,7 @@ options {
 	   reduce such attack surface
 	*/
 	recursion <%= @recursion %>;
+
 <% if @forwarders -%>
   forwarders {
   <% forwarders.sort.each do |forwarder| -%>
@@ -66,4 +70,3 @@ zone "." IN {
 include "/etc/named.rfc1912.zones";
 <% end -%>
 include "/etc/named.root.key";
-
