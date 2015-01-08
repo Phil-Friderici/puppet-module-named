@@ -16,6 +16,7 @@ class named (
   $namedzones       = '/etc/named.zones',
   $rfc1912enabled   = true,
   $rndcenabled      = false,
+  $zones            = undef,
 ) {
 
   if ($::operatingsystem == 'RedHat' and $::operatingsystemmajrelease == '7') {
