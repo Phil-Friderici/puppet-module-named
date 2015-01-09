@@ -45,11 +45,13 @@ class named (
     service {'named-chroot':
       ensure  => running,
       enable  => true,
+      subscribe => File[$namedconf],
     }
   } else {
     service {'named':
       ensure  => running,
       enable  => true,
+      subscribe => File[$namedconf],
     }
   } 
 
@@ -60,9 +62,4 @@ class named (
     mode    => '0640',
     content => template('named/named.conf.erb'),
   }
-
-  #file {$namedzones:
-  #  ensure  => present,
-  #
-  #}
 }
