@@ -113,6 +113,13 @@ Array of addresses or any
 
 - *Default*: undef
 
+namedconf
+---------
+Path for named.conf
+
+- *Default*: '/etc/named.conf'
+
+
 rfc1912enabled
 --------------
 Enable default rfc1912 config
