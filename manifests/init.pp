@@ -14,7 +14,6 @@ class named (
   $querylogfile     = undef,
   $rfc1912enabled   = true,
   $rndcenabled      = false,
-  $statisticsfile   = undef,
   $zones            = undef,
 ) {
 
