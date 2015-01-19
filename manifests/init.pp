@@ -65,7 +65,7 @@ class named (
   if $querylogfile =! undef {
     file {'/etc/logrotate.d/named-querylog':
       ensure  => present,
-      owner   => 'root'
+      owner   => 'root',
       group   => 'named',
       mode    => '0640',
       content => template('named/named-querylog.erb'),
