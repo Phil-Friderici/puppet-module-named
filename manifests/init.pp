@@ -11,8 +11,10 @@ class named (
   $allowquerycache  = undef,
   $allowtransfer    = undef,
   $namedconf        = '/etc/named.conf',
+  $querylogfile     = undef,
   $rfc1912enabled   = true,
   $rndcenabled      = false,
+  $statisticsfile   = undef,
   $zones            = undef,
 ) {
 
@@ -58,5 +60,19 @@ class named (
     group   => 'named',
     mode    => '0640',
     content => template('named/named.conf.erb'),
+  }
+
+  if $querylogfile =! undef {
+    file {'/etc/logrotate.d/named-querylog':
+      ensure  => present,
+      owner   => 'root'
+      group   => 'named',
+      mode    => '0640',
+      content => template('named/named-querylog.erb'),
+    }
+  } else {
+    file {'/etc/logrotate.d/named-querylog':
+      ensure  => absent,
+    }
   }
 }

@@ -49,6 +49,10 @@ options {
   <% end -%>};
 <% end -%>
 
+<% if @statisticsfile -%>
+  statistics-file <%= statisticsfile %>;
+
+<% end -%>
 	dnssec-enable yes;
 	dnssec-validation yes;
 	dnssec-lookaside auto;
@@ -63,10 +67,17 @@ options {
 };
 
 logging {
-        channel default_debug {
-                file "data/named.run";
-                severity dynamic;
-        };
+  channel default_debug {
+    file "data/named.run";
+    severity dynamic;
+  };
+<% if @querylogfile -%>
+  channel querylog {
+    file "<%= querylogfile %>";
+    print-time yes;
+  };
+  category queries { "querylog"; };
+<% end -%>
 };
 
 zone "." IN {

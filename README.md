@@ -30,8 +30,10 @@ named::allowquerycache:
   - any
 named::allowtransfer:
   - any
+named::querylogfile: 'data/query.log'
 named::rfc1912enabled: false
 named::rndcenabled: true
+named::statisticsfile: '/var/named/data/named.stats'
 named:;zones:
   'example.com':
     type: 'master'
@@ -131,6 +133,12 @@ rndcenabled
 Enable default rndc config, files are created during package install
 
 - *Default*: false
+
+statisticsfile
+--------------
+FIle to write statistics
+
+- *Default*: undef
 
 zones
 -----
