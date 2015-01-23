@@ -30,6 +30,7 @@ named::allowquerycache:
   - any
 named::allowtransfer:
   - any
+named::dnssec: false
 named::querylogfile: 'data/query.log'
 named::rfc1912enabled: false
 named::rndcenabled: true
@@ -113,6 +114,12 @@ allowtransfer
 Array of addresses or any
 
 - *Default*: undef
+
+dnssec
+------
+Enable or disable default dnssec config
+
+- *Default*: true
 
 namedconf
 ---------

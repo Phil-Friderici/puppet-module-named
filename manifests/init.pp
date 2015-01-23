@@ -10,6 +10,7 @@ class named (
   $allowquery       = [ 'localhost', ],
   $allowquerycache  = undef,
   $allowtransfer    = undef,
+  $dnssec           = true,
   $namedconf        = '/etc/named.conf',
   $querylogfile     = undef,
   $rfc1912enabled   = true,
