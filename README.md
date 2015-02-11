@@ -34,7 +34,7 @@ named::dnssec: false
 named::querylogfile: 'data/query.log'
 named::rfc1912enabled: false
 named::rndcenabled: true
-named:;zones:
+named::zones:
   'example.com':
     type: 'master'
     file: 'data/example.com'
