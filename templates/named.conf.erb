@@ -17,12 +17,12 @@ options {
 	dump-file 	"/var/named/data/cache_dump.db";
 	statistics-file "/var/named/data/named_stats.txt";
 	memstatistics-file "/var/named/data/named_mem_stats.txt";
-	allow-query { <% allowquery.sort.each do |allowq| -%><%= allowq %>; <% end -%>};
+	allow-query { <% @allowquery.sort.each do |allowq| -%><%= allowq %>; <% end -%>};
 <% if @allowquerycache -%>
-  allow-query-cache { <% allowquerycache.sort.each do |allowc| -%><%= allowc %>; <% end -%>};
+  allow-query-cache { <% @allowquerycache.sort.each do |allowc| -%><%= allowc %>; <% end -%>};
 <% end -%>
 <% if @allowtransfer -%>
-  allow-transfer { <% allowtransfer.sort.each do |allowt| -%><%= allowt %>; <% end -%>};
+  allow-transfer { <% @allowtransfer.sort.each do |allowt| -%><%= allowt %>; <% end -%>};
 <% end -%>
 
 	/*
@@ -39,17 +39,17 @@ options {
 	recursion <%= @recursion %>;
 
 <% if @checknames -%>
-  check-names response <%= checknames %>;
+  check-names response <%= @checknames %>;
 
 <% end -%>
 <% if @forwarders -%>
   forwarders {
-  <% forwarders.sort.each do |forwarder| -%>
+  <% @forwarders.sort.each do |forwarder| -%>
   <%= forwarder %>;
   <% end -%>};
 <% end -%>
 
-<% if dnssec == true -%>
+<% if @dnssec == true -%>
 	dnssec-enable yes;
 	dnssec-validation yes;
 	dnssec-lookaside auto;
@@ -75,7 +75,7 @@ logging {
   };
 <% if @querylogfile -%>
   channel querylog {
-    file "<%= querylogfile %>";
+    file "<%= @querylogfile %>";
     print-time yes;
   };
   category queries { "querylog"; };
@@ -87,11 +87,11 @@ zone "." IN {
 	file "named.ca";
 };
 
-<% if rfc1912enabled == true %>
+<% if @rfc1912enabled == true %>
 include "/etc/named.rfc1912.zones";
 <% end -%>
 include "/etc/named.root.key";
-<% if rndcenabled == true -%>
+<% if @rndcenabled == true -%>
 
 controls {
   inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
@@ -101,7 +101,7 @@ include "/etc/rndc.key";
 <% end -%>
 <% if @zones -%>
 
-<% zones.sort.each do |zone,data| -%>
+<% @zones.sort.each do |zone,data| -%>
 zone "<%= zone %>" in {
   type <%= data['type'] %>;
   file "<%= data['file'] %>";
