@@ -76,7 +76,7 @@ Enable or disabled recursion, 'yes' or 'no'
 
 checknames
 ----------
-Control check-names, 'ignore'
+Control check-names, 'ignore', 'warn' or 'fail'
 
 - *Default*: undef
 

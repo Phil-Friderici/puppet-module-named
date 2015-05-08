@@ -19,6 +19,7 @@ class named (
   $zones            = undef,
 ) {
 
+  # Check for supported OSes and set packages to install
   if ($::operatingsystem == 'RedHat' and $::operatingsystemmajrelease == '7') {
     if ($chroot == true) {
       $packages = ['bind-chroot', 'bind', 'bind-utils', 'bind-license', 'bind-libs', 'bind-libs-lite', ]
@@ -33,6 +34,38 @@ class named (
     fail("This module supports RedHat 7, you are running $::operatingsystem $::operatingsystemmajrelease")
   }
 
+  # Validate input to module
+  validate_bool($chroot)
+  if $forwarders != undef {
+    validate_array($forwarders)
+  }
+  if $zonestatistics != undef {
+    validate_re($zonestatistics, '^yes$', "named::zonestatistics may either be undef or 'yes' and is set to <${zonestatistics}>.")
+  }
+  validate_re($recursion, '^(yes|no)$', "named::recursion may either be 'yes' or 'no' and is set to <${recursion}>.")
+  if $checknames != undef {
+    validate_re($checknames, '^(ignore|warn|fail)', "named::checknames may either be 'ignore', 'warn' or 'fail' and is set to <${checknames}>.")
+  }
+  validate_array($ipv4listen)
+  validate_integer($ipv4port)
+  validate_array($ipv6listen)
+  validate_integer($ipv6port)
+  validate_array($allowquery)
+  if $allowquerycache != undef {
+    validate_array($allowquerycache)
+  }
+  if $allowtransfer != undef {
+    validate_array($allowtransfer)
+  }
+  validate_bool($dnssec)
+  validate_absolute_path($namedconf)
+  if $querylogfile != undef {
+    validate_absolute_path($querylogfile)
+  }
+  validate_bool($rfc1912enabled)
+  validate_bool($rndcenabled)
+
+  # The code
   package {$packages:
     ensure  => present,
   }
