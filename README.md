@@ -18,6 +18,7 @@ This module has been tested to work on the following systems using Puppet v3
 named::chroot: false
 named::forwarders:
   - 8.8.8.8
+names::zonestatistcs: 'yes'
 named::recursion: 'yes'
 named::checknames: 'ignore'
 named::ipv4listen:
@@ -58,6 +59,12 @@ Configure the server as chroot
 forwarders
 ----------
 Array of addresses to use as forwarders
+
+- *Default*: undef
+
+zonestatistcs
+-------------
+Enabled zone-statistics, undef or 'yes'
 
 - *Default*: undef
 

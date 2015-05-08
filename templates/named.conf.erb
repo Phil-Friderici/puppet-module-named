@@ -16,6 +16,9 @@ options {
 	directory 	"/var/named";
 	dump-file 	"/var/named/data/cache_dump.db";
 	statistics-file "/var/named/data/named_stats.txt";
+<% if @zonestatistics -%>
+  zone-statistics yes;
+<% end -%>
 	memstatistics-file "/var/named/data/named_mem_stats.txt";
 	allow-query { <% @allowquery.sort.each do |allowq| -%><%= allowq %>; <% end -%>};
 <% if @allowquerycache -%>

@@ -1,6 +1,7 @@
 class named (
   $chroot           = false,
   $forwarders       = undef,
+  $zonestatistics   = undef,
   $recursion        = 'yes',
   $checknames       = undef,
   $ipv4listen       = [ '127.0.0.1', ],
