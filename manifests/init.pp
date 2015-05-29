@@ -67,7 +67,7 @@ class named (
 
   # The code
   package {$packages:
-    ensure  => present,
+    ensure  => installed,
   }
 
   if ($chroot == true) {

@@ -1,7 +1,13 @@
-require 'rake'
+require 'puppetlabs_spec_helper/rake_tasks'
+require 'puppet-lint/tasks/puppet-lint'
+PuppetLint.configuration.send('disable_80chars')
+PuppetLint.configuration.relative = true
+PuppetLint.configuration.ignore_paths = ["spec/**/*.pp"]
 
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = 'spec/*/*_spec.rb'
+desc "Run puppet in noop mode and check for syntax errors."
+task :validate do
+   Dir['manifests/**/*.pp'].each do |path|
+     sh "puppet parser validate --noop #{path}"
+   end
 end
+
