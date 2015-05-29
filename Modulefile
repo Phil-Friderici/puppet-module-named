@@ -1,5 +1,5 @@
 name 'named'
-version 'v0.3.0'
+version 'v0.4.1'
 source 'https://github.com/kividiot/puppet-module-named.git'
 author 'erisson'
 license 'Apache License, Version 2.0'
